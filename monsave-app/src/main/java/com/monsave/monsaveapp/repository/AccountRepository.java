@@ -1,4 +1,4 @@
-package com.monsave.monsaveapp.dao;
+package com.monsave.monsaveapp.repository;
 
 import com.monsave.monsaveapp.domain.Account;
 import org.springframework.data.repository.CrudRepository;

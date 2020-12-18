@@ -13,5 +13,6 @@ public class BalanceDto {
     private long id;
     private List<RecordDto> records;
     private AccountDto account;
+    private double startingBalance;
     private double balance;
 }

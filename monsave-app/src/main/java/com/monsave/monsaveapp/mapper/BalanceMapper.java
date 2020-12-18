@@ -14,16 +14,18 @@ public class BalanceMapper {
     public Balance toBalance(final BalanceDto balanceDto) {
         return new Balance(
                 balanceDto.getId(),
-                recordMapper.mapToRecordList(balanceDto.getRecords()),
+                recordMapper.toRecordList(balanceDto.getRecords()),
                 accountMapper.toAccount(balanceDto.getAccount()),
+                balanceDto.getStartingBalance(),
                 balanceDto.getBalance());
     }
 
     public BalanceDto toBalanceDto(final Balance balance) {
         return new BalanceDto(
                 balance.getId(),
-                recordMapper.maoToRecordDtoList(balance.getRecords()),
+                recordMapper.toRecordDtoList(balance.getRecords()),
                 accountMapper.toAccountDto(balance.getAccount()),
+                balance.getStartingBalance(),
                 balance.getBalance());
     }
 
@@ -31,8 +33,9 @@ public class BalanceMapper {
         return balanceDtoList.stream()
                 .map(bDL -> new Balance(
                         bDL.getId(),
-                        recordMapper.mapToRecordList(bDL.getRecords()),
+                        recordMapper.toRecordList(bDL.getRecords()),
                         accountMapper.toAccount(bDL.getAccount()),
+                        bDL.getStartingBalance(),
                         bDL.getBalance()))
                 .collect(Collectors.toList());
     }
@@ -41,8 +44,9 @@ public class BalanceMapper {
         return balanceList.stream()
                 .map(bL -> new BalanceDto(
                         bL.getId(),
-                        recordMapper.maoToRecordDtoList(bL.getRecords()),
+                        recordMapper.toRecordDtoList(bL.getRecords()),
                         accountMapper.toAccountDto(bL.getAccount()),
+                        bL.getStartingBalance(),
                         bL.getBalance()))
                 .collect(Collectors.toList());
     }

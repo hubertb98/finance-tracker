@@ -1,7 +1,7 @@
 package com.monsave.monsaveapp.service;
 
-import com.monsave.monsaveapp.dao.AccountRepository;
 import com.monsave.monsaveapp.domain.Account;
+import com.monsave.monsaveapp.repository.AccountRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

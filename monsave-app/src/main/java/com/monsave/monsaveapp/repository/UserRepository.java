@@ -1,6 +1,6 @@
-package com.monsave.monsaveapp.dao;
+package com.monsave.monsaveapp.repository;
 
-import com.monsave.monsaveapp.domain.Record;
+import com.monsave.monsaveapp.domain.User;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
@@ -8,15 +8,16 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public interface RecordRepository extends CrudRepository<Record, Long> {
-    @Override
-    Record save(Record record);
+public interface UserRepository extends CrudRepository<User, Long> {
 
     @Override
-    Optional<Record> findById(Long id);
+    User save(User user);
 
     @Override
-    List<Record> findAll();
+    Optional<User> findById(Long id);
+
+    @Override
+    List<User> findAll();
 
     @Override
     void deleteById(Long id);

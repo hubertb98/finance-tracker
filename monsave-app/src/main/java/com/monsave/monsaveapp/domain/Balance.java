@@ -3,6 +3,7 @@ package com.monsave.monsaveapp.domain;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.text.DecimalFormat;
@@ -11,6 +12,7 @@ import java.util.List;
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
+@Setter
 @Entity(name = "BALANCES")
 public class Balance {
     @Id
@@ -25,6 +27,8 @@ public class Balance {
     private List<Record> records;
     @OneToOne
     private Account account;
+    @Column(name = "STARTING_BALANCE")
+    private double startingBalance;
     @Column(name = "BALANCE")
     private double balance;
 
@@ -40,7 +44,7 @@ public class Balance {
                 posAmount = posAmount + recordsList.get(i).getAmount();
             }
         }
-        balance = posAmount - negAmount;
+        balance = startingBalance + posAmount - negAmount;
         return df.format(balance);
     }
 }
