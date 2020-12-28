@@ -6,7 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.text.DecimalFormat;
+import java.math.BigDecimal;
 import java.util.List;
 
 @Getter
@@ -28,23 +28,8 @@ public class Balance {
     @OneToOne
     private Account account;
     @Column(name = "STARTING_BALANCE")
-    private double startingBalance;
+    private BigDecimal startingBalance;
     @Column(name = "BALANCE")
-    private double balance;
+    private BigDecimal balanceAmount;
 
-    public String getBalance(List<Record> recordsList) {
-        DecimalFormat df = new DecimalFormat("PLN #.##");
-        double posAmount = 0;
-        double negAmount = 0;
-
-        for (int i = 0; i < recordsList.size(); i++) {
-            if (recordsList.get(i).getType() == AmountType.LOSS) {
-                negAmount = negAmount + recordsList.get(i).getAmount();
-            } else if (recordsList.get(i).getType() == AmountType.PROFIT) {
-                posAmount = posAmount + recordsList.get(i).getAmount();
-            }
-        }
-        balance = startingBalance + posAmount - negAmount;
-        return df.format(balance);
-    }
 }

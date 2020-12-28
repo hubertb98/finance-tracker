@@ -1,6 +1,6 @@
 package com.monsave.monsaveapp.controller;
 
-import com.monsave.monsaveapp.controller.exception.RecordNotFoundException;
+import com.monsave.monsaveapp.controller.exception.NotFoundException;
 import com.monsave.monsaveapp.domain.dto.RecordDto;
 import com.monsave.monsaveapp.mapper.RecordMapper;
 import com.monsave.monsaveapp.service.RecordService;
@@ -21,27 +21,27 @@ public class RecordsController {
 
     @GetMapping(value = "/records")
     public List<RecordDto> getRecords() {
-        return mapper.toRecordDtoList(service.getAllRecords());
+        return service.getAllRecords();
     }
 
     @GetMapping(value = "/records/{recordId}")
-    public RecordDto getRecord(@PathVariable("recordId") long recordId) throws RecordNotFoundException {
-        return mapper.toRecordDto(service.getRecord(recordId).orElseThrow(RecordNotFoundException::new));
+    public RecordDto getRecord(@PathVariable("recordId") long recordId) throws NotFoundException {
+        return mapper.toRecordDto(service.getRecord(recordId).orElseThrow(NotFoundException::new));
     }
 
     @PostMapping(value = "/records", consumes = APPLICATION_JSON_VALUE)
     public void createRecord(@RequestBody RecordDto recordDto) {
-        service.saveRecord(mapper.toRecord(recordDto));
+        service.createRecord(recordDto);
     }
 
     @PutMapping(value = "/records")
     public RecordDto updateRecord(@RequestBody RecordDto recordDto) {
-        return mapper.toRecordDto(service.saveRecord(mapper.toRecord(recordDto)));
+        return service.createRecord(recordDto);
     }
 
     @DeleteMapping(value = "/records/{recordId}")
-    public void deleteRecord(@PathVariable("recordId") long recordId) {
-        service.deleteRecord(recordId);
+    public void removeRecord(@PathVariable("recordId") long recordId) {
+        service.removeRecord(recordId);
     }
 
 }

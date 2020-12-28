@@ -27,20 +27,13 @@ public class UserMapper {
 
     public List<User> toUserList(final List<UserDto> userDtoList) {
         return userDtoList.stream()
-                .map(userDto -> new User(
-                        userDto.getId(),
-                        userDto.getName(),
-                        userDto.getUsername(),
-                        userDto.getPassword()))
+                .map(this::toUser)
                 .collect(Collectors.toList());
     }
 
     public List<UserDto> toUserDtoList(final List<User> userList) {
         return userList.stream()
-                .map(user -> new UserDto(user.getId(),
-                        user.getName(),
-                        user.getUsername(),
-                        user.getPassword()))
+                .map(this::toUserDto)
                 .collect(Collectors.toList());
     }
 }

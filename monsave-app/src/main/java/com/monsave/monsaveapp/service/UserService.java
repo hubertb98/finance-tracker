@@ -17,7 +17,7 @@ public class UserService {
         return repository.findAll();
     }
 
-    public User saveUser(final User user) {
+    public User createUser(final User user) {
         return repository.save(user);
     }
 
@@ -25,7 +25,7 @@ public class UserService {
         return repository.findById(id);
     }
 
-    public void deleteUser(final Long id) {
+    public void removeUser(final Long id) {
         repository.deleteById(id);
     }
 }

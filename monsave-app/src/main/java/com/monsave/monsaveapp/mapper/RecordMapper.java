@@ -29,13 +29,13 @@ public class RecordMapper {
 
     public List<Record> toRecordList(final List<RecordDto> recordsDto) {
         return recordsDto.stream()
-                .map(rDl -> new Record(rDl.getId(), rDl.getRecordName(), rDl.getAmount(), rDl.getType(), rDl.getDate()))
+                .map(this::toRecord)
                 .collect(Collectors.toList());
     }
 
     public List<RecordDto> toRecordDtoList(final List<Record> records) {
         return records.stream()
-                .map(r -> new RecordDto(r.getId(), r.getRecordName(), r.getAmount(), r.getType(), r.getDate()))
+                .map(this::toRecordDto)
                 .collect(Collectors.toList());
     }
 }

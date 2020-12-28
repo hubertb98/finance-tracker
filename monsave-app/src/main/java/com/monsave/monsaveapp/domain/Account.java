@@ -20,4 +20,8 @@ public class Account {
     private String name;
     @OneToOne
     private Balance balance;
+
+    public Account(String name) {
+        this.name = name;
+    }
 }

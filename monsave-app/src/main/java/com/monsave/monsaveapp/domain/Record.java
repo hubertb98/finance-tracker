@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
 import java.time.LocalDate;
 
 @AllArgsConstructor
@@ -21,7 +22,7 @@ public class Record {
     private String recordName;
 
     @Column(name = "AMOUNT")
-    private double amount;
+    private BigDecimal amount;
 
     @Column(name = "TYPE")
     private AmountType type;
@@ -33,17 +34,7 @@ public class Record {
     @JoinColumn(name = "BALANCE_ID")
     private Balance balance;
 
-    public String printAmount() {
-        String printAmount = "";
-        if (type == AmountType.LOSS) {
-            printAmount = "-PLN " + amount;
-        } else if (type == AmountType.PROFIT) {
-            printAmount = "PLN " + amount;
-        }
-        return printAmount;
-    }
-
-    public Record(Long id, String recordName, double amount, AmountType type, LocalDate date) {
+    public Record(Long id, String recordName, BigDecimal amount, AmountType type, LocalDate date) {
         this.id = id;
         this.recordName = recordName;
         this.amount = amount;
