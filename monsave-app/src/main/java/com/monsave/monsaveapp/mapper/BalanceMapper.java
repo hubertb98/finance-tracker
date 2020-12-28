@@ -43,6 +43,4 @@ public class BalanceMapper {
                 .map(this::toBalanceDto)
                 .collect(Collectors.toList());
     }
-
-
 }

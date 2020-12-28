@@ -31,4 +31,5 @@ public class Balance {
     private BigDecimal startingBalance;
     @Column(name = "BALANCE")
     private BigDecimal balanceAmount;
+
 }
