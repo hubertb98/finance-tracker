@@ -1,45 +1,44 @@
 package com.monsave.monsaveapp.controller;
 
+import com.monsave.monsaveapp.controller.exception.NotFoundException;
 import com.monsave.monsaveapp.domain.dto.AccountDto;
-import com.monsave.monsaveapp.domain.dto.BalanceDto;
+import com.monsave.monsaveapp.service.AccountService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
 @RestController
-@RequestMapping("/")
+@RequestMapping("/v1")
 public class AccountsController {
+    @Autowired
+    private AccountService service;
 
     @GetMapping(value = "/accounts")
     public List<AccountDto> getAccounts() {
-        return new ArrayList<>();
+        return service.getAllAccounts();
     }
 
     @GetMapping(value = "/accounts/{accountId}")
-    public AccountDto getAccount(@PathVariable("accountId") long accountId) {
-        return new AccountDto();
+    public Optional<AccountDto> getAccount(@PathVariable("accountId") long accountId) throws NotFoundException {
+        return service.getAccount(accountId);
     }
 
-    @PostMapping(value = "/accounts")
-    public void createAccount() {
+    @PostMapping(value = "/accounts", consumes = APPLICATION_JSON_VALUE)
+    public void createAccount(@RequestBody AccountDto accountDto) {
+        service.createAccount(accountDto);
     }
 
-    @PutMapping(value = "/accounts", consumes = APPLICATION_JSON_VALUE)
-    public AccountDto updateAccount(@RequestBody AccountDto accountDto) {
-        return new AccountDto();
+    @PutMapping(value = "/accounts")
+    public void updateAccount(@RequestBody AccountDto accountDto) {
+        service.createAccount(accountDto);
     }
 
     @DeleteMapping(value = "/accounts/{accountId}")
-    public void deleteAccount(@PathVariable("accountId") long accountId) {
+    public void removeAccount(@PathVariable("accountId") long accountId) {
+        service.removeAccount(accountId);
     }
-
-    @GetMapping(value = "/balance")
-    public BalanceDto getBalance() {
-        return new BalanceDto();
-    }
-
-
 }

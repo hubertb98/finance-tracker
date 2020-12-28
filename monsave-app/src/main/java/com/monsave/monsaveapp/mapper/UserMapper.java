@@ -9,7 +9,7 @@ import java.util.stream.Collectors;
 
 @Component
 public class UserMapper {
-    public User mapToUser(final UserDto userDto) {
+    public User toUser(final UserDto userDto) {
         return new User(
                 userDto.getId(),
                 userDto.getName(),
@@ -17,7 +17,7 @@ public class UserMapper {
                 userDto.getPassword());
     }
 
-    public UserDto mapToUserDto(final User user) {
+    public UserDto toUserDto(final User user) {
         return new UserDto(
                 user.getId(),
                 user.getName(),
@@ -25,22 +25,15 @@ public class UserMapper {
                 user.getPassword());
     }
 
-    public List<User> mapToUserList(final List<UserDto> userDtoList) {
+    public List<User> toUserList(final List<UserDto> userDtoList) {
         return userDtoList.stream()
-                .map(userDto -> new User(
-                        userDto.getId(),
-                        userDto.getName(),
-                        userDto.getUsername(),
-                        userDto.getPassword()))
+                .map(this::toUser)
                 .collect(Collectors.toList());
     }
 
-    public List<UserDto> mapToUserDtoList(final List<User> userList) {
+    public List<UserDto> toUserDtoList(final List<User> userList) {
         return userList.stream()
-                .map(user -> new UserDto(user.getId(),
-                        user.getName(),
-                        user.getUsername(),
-                        user.getPassword()))
+                .map(this::toUserDto)
                 .collect(Collectors.toList());
     }
 }

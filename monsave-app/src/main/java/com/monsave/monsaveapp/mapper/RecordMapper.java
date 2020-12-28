@@ -9,7 +9,7 @@ import java.util.stream.Collectors;
 
 @Component
 public class RecordMapper {
-    public Record mapToRecord(final RecordDto recordDto) {
+    public Record toRecord(final RecordDto recordDto) {
         return new Record(
                 recordDto.getId(),
                 recordDto.getRecordName(),
@@ -18,7 +18,7 @@ public class RecordMapper {
                 recordDto.getDate());
     }
 
-    public RecordDto mapToRecordDto(final Record record) {
+    public RecordDto toRecordDto(final Record record) {
         return new RecordDto(
                 record.getId(),
                 record.getRecordName(),
@@ -27,15 +27,15 @@ public class RecordMapper {
                 record.getDate());
     }
 
-    public List<Record> mapToRecordList(final List<RecordDto> recordsDto) {
+    public List<Record> toRecordList(final List<RecordDto> recordsDto) {
         return recordsDto.stream()
-                .map(rDl -> new Record(rDl.getId(), rDl.getRecordName(), rDl.getAmount(), rDl.getType(), rDl.getDate()))
+                .map(this::toRecord)
                 .collect(Collectors.toList());
     }
 
-    public List<RecordDto> maoToRecordDtoList(final List<Record> records) {
+    public List<RecordDto> toRecordDtoList(final List<Record> records) {
         return records.stream()
-                .map(r -> new RecordDto(r.getId(), r.getRecordName(), r.getAmount(), r.getType(), r.getDate()))
+                .map(this::toRecordDto)
                 .collect(Collectors.toList());
     }
 }

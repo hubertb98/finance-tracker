@@ -1,7 +1,7 @@
 package com.monsave.monsaveapp.service;
 
-import com.monsave.monsaveapp.dao.UserRepository;
 import com.monsave.monsaveapp.domain.User;
+import com.monsave.monsaveapp.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,7 +17,7 @@ public class UserService {
         return repository.findAll();
     }
 
-    public User saveUser(final User user) {
+    public User createUser(final User user) {
         return repository.save(user);
     }
 
@@ -25,7 +25,7 @@ public class UserService {
         return repository.findById(id);
     }
 
-    public void deleteUser(final Long id) {
+    public void removeUser(final Long id) {
         repository.deleteById(id);
     }
 }
